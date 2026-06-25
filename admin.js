@@ -45,8 +45,9 @@
   function enterApp(user) {
     show($("loginWrap"), false); show($("app"), true);
     $("whoami").textContent = user.email;
-    loadBoard(); loadCustomers(); loadMoney(); loadLeads();
+    loadBoard(); loadCustomers(); loadMoney(); loadExpenses(); loadGoals(); loadLeads();
   }
+  function refreshFinances() { loadMoney(); loadGoals(); }
   $("loginForm").addEventListener("submit", function (e) {
     e.preventDefault();
     if (!configured) { refreshAuth(); return; }
@@ -108,6 +109,7 @@
         (phone ? '<a class="iconbtn" href="tel:' + esc(phone) + '" title="Call">📞</a>' : "") +
         (c.email ? '<a class="iconbtn" href="mailto:' + esc(c.email) + '" title="Email">✉️</a>' : "") +
         '<button class="iconbtn" data-note="' + j.id + '" title="Add note">📝</button>' +
+        '<button class="iconbtn" data-price="' + j.id + '" title="Set job amount">💲</button>' +
         '<span class="spacer"></span>' +
         '<button class="iconbtn" data-move="prev" data-id="' + j.id + '" data-cur="' + j.status + '" title="Move left">←</button>' +
         '<button class="iconbtn" data-move="next" data-id="' + j.id + '" data-cur="' + j.status + '" title="Move right">→</button>' +
@@ -117,8 +119,10 @@
       "</div>";
   }
   function setStatus(id, status) {
-    db.from("jobs").update({ status: status }).eq("id", id).then(function (r) {
-      if (r.error) alert(r.error.message); loadBoard();
+    var patch = { status: status };
+    if (status === "completed" || status === "paid") patch.completed_date = new Date().toISOString();
+    db.from("jobs").update(patch).eq("id", id).then(function (r) {
+      if (r.error) alert(r.error.message); loadBoard(); refreshFinances();
     });
   }
   function wireBoard() {
@@ -149,6 +153,12 @@
     });
     document.querySelectorAll("[data-add]").forEach(function (b) {
       b.addEventListener("click", function () { addJob(b.dataset.add); });
+    });
+    document.querySelectorAll("[data-price]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var v = window.prompt("Job amount ($):");
+        if (v !== null && v !== "") db.from("jobs").update({ final_amount: Number(v) || 0 }).eq("id", b.dataset.price).then(function () { loadBoard(); refreshFinances(); });
+      });
     });
   }
 
@@ -181,19 +191,106 @@
     });
   }
 
-  // ---------- Money (GET) ----------
+  // ---------- Finance helpers ----------
+  var GET_RATE = 0.04712;
+  function jobAmt(j) { return Number(j.final_amount != null ? j.final_amount : (j.quote_amount || 0)) || 0; }
+  function jobMonth(j) { var d = j.completed_date || j.updated_at; return d ? String(d).slice(0, 7) : ""; }
+  function curMonth() { var d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0"); }
+  function sumVals(o) { var t = 0; Object.keys(o).forEach(function (k) { t += o[k]; }); return t; }
+
+  // ---------- Money: KPIs + monthly P&L ----------
   function loadMoney() {
-    db.from("get_tax_by_period").select("*").then(function (r) {
-      if (r.error) { $("moneyTable").innerHTML = '<div class="empty">' + esc(r.error.message) + "</div>"; return; }
-      var rows = r.data || [];
-      if (!rows.length) { $("moneyTable").innerHTML = '<div class="empty">No paid invoices yet.</div>'; return; }
-      $("moneyTable").innerHTML = "<table><thead><tr><th>Period</th><th class='num'>Invoices</th><th class='num'>Gross income</th><th class='num'>GET collected</th></tr></thead><tbody>" +
-        rows.map(function (t) {
-          return "<tr><td>" + esc(t.period_month) + "</td><td class='num'>" + t.invoice_count +
-            "</td><td class='num'>" + money(t.gross_income) + "</td><td class='num'>" + money(t.get_collected) + "</td></tr>";
-        }).join("") + "</tbody></table>";
+    Promise.all([
+      db.from("jobs").select("final_amount,quote_amount,completed_date,updated_at,status").eq("status", "paid"),
+      db.from("expenses").select("date,amount")
+    ]).then(function (res) {
+      var jobs = res[0].data || [], exps = res[1].data || [], cm = curMonth();
+      var inc = {}, exp = {};
+      jobs.forEach(function (j) { var m = jobMonth(j) || cm; inc[m] = (inc[m] || 0) + jobAmt(j); });
+      exps.forEach(function (e) { var m = (e.date || "").slice(0, 7) || cm; exp[m] = (exp[m] || 0) + (Number(e.amount) || 0); });
+      var allInc = sumVals(inc), allExp = sumVals(exp), incM = inc[cm] || 0, expM = exp[cm] || 0;
+      function kpi(cls, label, val, sub) { return '<div class="kpi ' + cls + '"><div class="k-label">' + label + '</div><div class="k-val">' + val + '</div>' + (sub ? '<div class="k-sub">' + sub + '</div>' : '') + '</div>'; }
+      $("moneyKpis").innerHTML =
+        kpi("", "Income · this month", money(incM)) +
+        kpi("", "Expenses · this month", money(expM)) +
+        kpi(incM - expM >= 0 ? "pos" : "neg", "Net profit · month", money(incM - expM)) +
+        kpi("accent", "Net profit · all-time", money(allInc - allExp), money(allInc) + " in · " + money(allExp) + " out") +
+        kpi("", "Est. GET owed", money(allInc * GET_RATE), "on " + money(allInc) + " paid");
+      var months = {}; Object.keys(inc).forEach(function (m) { months[m] = 1; }); Object.keys(exp).forEach(function (m) { months[m] = 1; });
+      var keys = Object.keys(months).sort().reverse();
+      if (!keys.length) { $("pnlTable").innerHTML = '<div class="empty">No paid jobs or expenses yet. Mark a job <b>Paid</b> in the pipeline to see income here.</div>'; return; }
+      $("pnlTable").innerHTML = "<table><thead><tr><th>Month</th><th class='num'>Income</th><th class='num'>Expenses</th><th class='num'>Net profit</th></tr></thead><tbody>" +
+        keys.map(function (m) { var i = inc[m] || 0, e = exp[m] || 0; return "<tr><td>" + m + "</td><td class='num'>" + money(i) + "</td><td class='num'>" + money(e) + "</td><td class='num'><b>" + money(i - e) + "</b></td></tr>"; }).join("") + "</tbody></table>";
     });
   }
+
+  // ---------- Expenses ----------
+  function loadExpenses() {
+    db.from("expenses").select("*").order("date", { ascending: false }).then(function (r) {
+      if (r.error) { $("expenseTable").innerHTML = '<div class="empty">' + esc(r.error.message) + "</div>"; return; }
+      var rows = r.data || [];
+      if (!rows.length) { $("expenseTable").innerHTML = '<div class="empty">No expenses logged yet.</div>'; return; }
+      $("expenseTable").innerHTML = "<table><thead><tr><th>Date</th><th>Expense</th><th>Category</th><th>Type</th><th class='num'>Amount</th><th></th></tr></thead><tbody>" +
+        rows.map(function (x) {
+          return "<tr><td>" + esc(x.date) + "</td><td><b>" + esc(x.label) + "</b></td><td>" + esc(x.category || "—") +
+            "</td><td>" + esc((x.type || "").replace("_", " ")) + "</td><td class='num'>" + money(x.amount) +
+            "</td><td class='num'><button class='iconbtn' data-delx='" + x.id + "' title='Delete'>✕</button></td></tr>";
+        }).join("") + "</tbody></table>";
+      document.querySelectorAll("[data-delx]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          if (window.confirm("Delete this expense?")) db.from("expenses").delete().eq("id", b.dataset.delx).then(function () { loadExpenses(); loadMoney(); });
+        });
+      });
+    });
+  }
+  $("expenseForm").addEventListener("submit", function (e) {
+    e.preventDefault(); var f = e.target;
+    var payload = { date: f.date.value || null, label: f.label.value.trim(), category: f.category.value.trim() || null, type: f.type.value, amount: Number(f.amount.value) || 0 };
+    if (!payload.label) return;
+    db.from("expenses").insert(payload).then(function (r) {
+      if (r.error) { alert(r.error.message); return; }
+      f.reset(); loadExpenses(); loadMoney();
+    });
+  });
+
+  // ---------- Goals ----------
+  function loadGoals() {
+    Promise.all([
+      db.from("settings").select("*").maybeSingle(),
+      db.from("jobs").select("final_amount,quote_amount,completed_date,updated_at,status").eq("status", "paid")
+    ]).then(function (res) {
+      var s = res[0].data || {}, jobs = res[1].data || [], cm = curMonth();
+      var gf = $("goalsForm");
+      gf.monthly_revenue_goal.value = s.monthly_revenue_goal || "";
+      gf.avg_job_value.value = s.avg_job_value || "";
+      var incM = 0; jobs.forEach(function (j) { if ((jobMonth(j) || cm) === cm) incM += jobAmt(j); });
+      var goal = Number(s.monthly_revenue_goal) || 0, avg = Number(s.avg_job_value) || 0;
+      if (!goal) { $("goalsPanel").innerHTML = '<div class="empty">Set a monthly revenue goal above to see your progress and a job-count plan.</div>'; return; }
+      var pct = Math.min(100, Math.round(incM / goal * 100)), remaining = Math.max(0, goal - incM);
+      var need = avg > 0 ? Math.ceil(remaining / avg) : null;
+      $("goalsPanel").innerHTML = '<div class="goalcard">' +
+        '<div class="row"><span>This month’s income</span><b>' + money(incM) + '</b></div>' +
+        '<div class="row"><span>Monthly goal</span><b>' + money(goal) + '</b></div>' +
+        '<div class="progress"><div class="bar" style="width:' + pct + '%"></div></div>' +
+        '<div class="row"><span>Progress</span><b>' + pct + '%</b></div>' +
+        '<div class="row"><span>Still to go</span><b>' + money(remaining) + '</b></div>' +
+        (need != null
+          ? '<div class="row"><span>Jobs needed to hit goal (at ' + money(avg) + '/job)</span><span class="big-need">' + need + '</span></div>'
+          : '<div class="row"><span>Add an average job value to see jobs needed</span><span></span></div>') +
+        '</div>';
+    });
+  }
+  $("goalsForm").addEventListener("submit", function (e) {
+    e.preventDefault(); var f = e.target;
+    db.from("settings").update({
+      monthly_revenue_goal: Number(f.monthly_revenue_goal.value) || 0,
+      avg_job_value: Number(f.avg_job_value.value) || 0,
+      updated_at: new Date().toISOString()
+    }).eq("id", true).then(function (r) {
+      if (r.error) { alert(r.error.message); return; }
+      loadGoals();
+    });
+  });
 
   // ---------- New Leads ----------
   function loadLeads() {

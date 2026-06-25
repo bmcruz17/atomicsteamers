@@ -41,6 +41,8 @@
       <div class="tab active" data-view="board">Pipeline</div>
       <div class="tab" data-view="customers">Customers</div>
       <div class="tab" data-view="money">Money</div>
+      <div class="tab" data-view="expenses">Expenses</div>
+      <div class="tab" data-view="goals">Goals</div>
       <div class="tab" data-view="leads">New Leads</div>
       <div class="tab" data-view="training">Training</div>
     </div>
@@ -62,9 +64,42 @@
 
     <!-- Money -->
     <section class="view hidden" id="view-money">
-      <div class="vhead"><div><h1>Money</h1><p>GET owed to Hawaii, by month (paid invoices, cash basis).</p></div></div>
-      <div id="moneyTable"><div class="loading">Loading…</div></div>
-      <p class="note">File Form G-45 each period and G-49 annually with Hawaii DOTAX. GET rate (Oahu 4.712%) is set per invoice — confirm with your tax preparer.</p>
+      <div class="vhead"><div><h1>Money</h1><p>Income from paid jobs, expenses, and net profit by month.</p></div></div>
+      <div class="kpis" id="moneyKpis"><div class="loading">Loading…</div></div>
+      <h3 class="subhead">Monthly profit &amp; loss</h3>
+      <div id="pnlTable"><div class="loading">Loading…</div></div>
+      <p class="note">Income = jobs marked <b>Paid</b> in the pipeline (final amount, or quote if no final set). GET shown is an
+        estimate at your set rate (Oahu 4.712%) — file Form G-45 each period and G-49 annually with Hawaii DOTAX. Not tax advice.</p>
+    </section>
+
+    <!-- Expenses -->
+    <section class="view hidden" id="view-expenses">
+      <div class="vhead"><div><h1>Expenses</h1><p>Track diesel, supplies, subscriptions, and overhead.</p></div></div>
+      <form class="formbar" id="expenseForm">
+        <input type="date" name="date" required />
+        <input type="text" name="label" placeholder="What was it? (e.g. Diesel fuel)" required />
+        <input type="text" name="category" placeholder="Category (Fuel, Supplies…)" list="catlist" />
+        <datalist id="catlist">
+          <option>Fuel</option><option>Supplies</option><option>PPE</option><option>Equipment</option>
+          <option>Subscriptions</option><option>Marketing</option><option>Insurance</option>
+          <option>Vehicle</option><option>Licenses</option><option>Other</option>
+        </datalist>
+        <select name="type"><option value="one_time">One-time</option><option value="monthly">Monthly</option><option value="yearly">Yearly</option></select>
+        <input type="number" name="amount" step="0.01" min="0" placeholder="$ Amount" required style="max-width:130px;" />
+        <button class="btn btn--green" type="submit">+ Add expense</button>
+      </form>
+      <div id="expenseTable"><div class="loading">Loading…</div></div>
+    </section>
+
+    <!-- Goals -->
+    <section class="view hidden" id="view-goals">
+      <div class="vhead"><div><h1>Goals &amp; Projections</h1><p>Set a monthly revenue goal and see what it takes to hit it.</p></div></div>
+      <form class="formbar" id="goalsForm">
+        <label class="inline">Monthly revenue goal <input type="number" name="monthly_revenue_goal" step="100" min="0" placeholder="$" style="max-width:140px;" /></label>
+        <label class="inline">Avg job value <input type="number" name="avg_job_value" step="25" min="0" placeholder="$" style="max-width:130px;" /></label>
+        <button class="btn btn--green" type="submit">Save goal</button>
+      </form>
+      <div id="goalsPanel"><div class="loading">Loading…</div></div>
     </section>
 
     <!-- Leads -->
