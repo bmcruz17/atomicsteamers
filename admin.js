@@ -66,7 +66,8 @@
     tab.addEventListener("click", function () {
       document.querySelectorAll(".tab").forEach(function (t) { t.classList.remove("active"); });
       tab.classList.add("active");
-      ["board", "customers", "money", "leads"].forEach(function (v) { show($("view-" + v), v === tab.dataset.view); });
+      document.querySelectorAll(".view").forEach(function (sec) { sec.classList.add("hidden"); });
+      show($("view-" + tab.dataset.view), true);
     });
   });
 
