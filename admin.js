@@ -75,7 +75,7 @@
   // ---------- Pipeline board ----------
   function loadBoard() {
     db.from("jobs")
-      .select("id,status,service_type,scheduled_date,quote_amount,final_amount,notes,updated_at,customer:customers(name,phone,email,town)")
+      .select("id,status,service_type,scheduled_date,quote_amount,final_amount,notes,updated_at,customer:customers(name,phone,email,address,town,property_type)")
       .then(function (r) {
         if (r.error) { $("board").innerHTML = '<div class="empty">' + esc(r.error.message) + "</div>"; return; }
         renderBoard(r.data || []);
@@ -93,20 +93,38 @@
     }).join("");
     wireBoard();
   }
+  function capitalize(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
+  function fmtPhone(p) {
+    var d = (p || "").replace(/[^0-9]/g, "");
+    if (d.length === 11 && d[0] === "1") d = d.slice(1);
+    if (d.length === 10) return "(" + d.slice(0, 3) + ") " + d.slice(3, 6) + "-" + d.slice(6);
+    return p || "";
+  }
+  function telHref(p) { return (p || "").replace(/[^0-9+]/g, ""); }
+
   function cardHtml(j) {
     var c = j.customer || {};
     var svc = j.service_type || "";
     var tagClass = svc === "sanitizing" ? "tag--amber" : (svc === "inspection" ? "tag--blue" : "tag--green");
     var amt = j.final_amount != null ? j.final_amount : j.quote_amount;
-    var phone = c.phone || "";
+    var ph = telHref(c.phone);
+    var loc = [c.address, c.town].filter(Boolean).join(", ");
+    var prop = c.property_type ? capitalize(c.property_type.replace(/_/g, " ")) : "";
     return '<div class="card" draggable="true" data-id="' + j.id + '">' +
-      '<div class="card__name">' + esc(c.name || "Unknown") + "</div>" +
-      '<div class="card__sub">' + esc(c.town || "Oahu") + "</div>" +
-      '<span class="tag ' + tagClass + '">' + esc(svc.replace("_", " ") || "bed bug") + "</span>" +
+      '<div class="card__top">' +
+        '<div class="card__name">' + esc(c.name || "Unknown") + "</div>" +
+        '<span class="tag ' + tagClass + '">' + esc(svc.replace("_", " ") || "bed bug") + "</span>" +
+      "</div>" +
       (amt != null ? '<div class="card__money"><b>' + money(amt) + "</b></div>" : "") +
-      (phone ? '<div class="card__phone">📞 ' + esc(phone) + "</div>" : "") +
+      '<div class="card__info">' +
+        (loc ? '<div class="info" title="' + esc(loc) + '">📍 ' + esc(loc) + "</div>" : "") +
+        (prop ? '<div class="info">🏠 ' + esc(prop) + "</div>" : "") +
+        (c.phone ? '<div class="info">📞 ' + esc(fmtPhone(c.phone)) + "</div>" : "") +
+        (c.email ? '<div class="info" title="' + esc(c.email) + '">✉️ ' + esc(c.email) + "</div>" : "") +
+      "</div>" +
       '<div class="acts">' +
-        (phone ? '<a class="iconbtn" href="tel:' + esc(phone) + '" title="Call">📞</a>' : "") +
+        (ph ? '<a class="iconbtn" href="tel:' + esc(ph) + '" title="Call">📞</a>' : "") +
+        (ph ? '<a class="iconbtn" href="sms:' + esc(ph) + '" title="Text">💬</a>' : "") +
         (c.email ? '<a class="iconbtn" href="mailto:' + esc(c.email) + '" title="Email">✉️</a>' : "") +
         '<button class="iconbtn" data-note="' + j.id + '" title="Add note">📝</button>' +
         '<button class="iconbtn" data-price="' + j.id + '" title="Set job amount">💲</button>' +
@@ -166,9 +184,14 @@
   function addJob(stage) {
     var name = window.prompt("Customer name:"); if (!name) return;
     var phone = window.prompt("Phone:") || null;
+    var email = window.prompt("Email:") || null;
+    var address = window.prompt("Street address:") || null;
     var town = window.prompt("Town (e.g. Honolulu):") || null;
+    var allowed = ["home", "condo", "apartment", "rental", "hotel", "commercial", "other"];
+    var prop = (window.prompt("Property — home / condo / apartment / rental / hotel / commercial:", "home") || "").trim().toLowerCase();
+    if (allowed.indexOf(prop) < 0) prop = null;
     var svc = (window.prompt("Service — bed_bug / sanitizing / inspection:", "bed_bug") || "bed_bug").trim();
-    db.from("customers").insert({ name: name, phone: phone, town: town, source: "manual" }).select().single().then(function (r) {
+    db.from("customers").insert({ name: name, phone: phone, email: email, address: address, town: town, property_type: prop, source: "manual" }).select().single().then(function (r) {
       if (r.error) { alert(r.error.message); return; }
       db.from("jobs").insert({ customer_id: r.data.id, service_type: svc, status: stage || "new_lead" }).then(function (jr) {
         if (jr.error) alert(jr.error.message); loadBoard(); loadCustomers();
