@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Atomic Steamers — Staff Dashboard</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <!-- Login -->
+  <div class="login-wrap" id="loginWrap">
+    <form class="login-card" id="loginForm">
+      <span class="brand-mark">⚛︎</span>
+      <h1>Staff Dashboard</h1>
+      <p class="sub">Sign in to manage leads, jobs, billing &amp; GET.</p>
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="username" required />
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password" required />
+      <button class="btn btn--block" type="submit">Sign In</button>
+      <p class="msg" id="loginMsg"></p>
+      <a class="login-back" href="index.html">← Back to website</a>
+    </form>
+  </div>
+
+  <!-- App -->
+  <div id="app" class="hidden">
+    <div class="topbar">
+      <div class="brand"><span class="brand-mark">⚛︎</span> Atomic Steamers</div>
+      <div class="user"><span id="whoami"></span>
+        <button class="btn btn--sm btn--ghost" id="logoutBtn">Sign out</button>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" data-view="board">Pipeline Board</div>
+      <div class="tab" data-view="leads">New Leads <span class="count" id="leadCount">0</span></div>
+      <div class="tab" data-view="taxes">GET / Taxes</div>
+    </div>
+
+    <!-- Board -->
+    <section class="view" id="view-board">
+      <div class="board" id="board"><div class="loading">Loading board…</div></div>
+    </section>
+
+    <!-- Leads -->
+    <section class="view hidden" id="view-leads">
+      <div class="leadlist" id="leadList"><div class="loading">Loading leads…</div></div>
+    </section>
+
+    <!-- Taxes -->
+    <section class="view hidden" id="view-taxes">
+      <div class="tax-table" id="taxTable"><div class="loading">Loading…</div></div>
+      <p class="tax-note">GET shown on <strong>paid</strong> invoices, grouped by month (cash basis).
+        File Form G-45 each period and G-49 annually with Hawaii DOTAX. Confirm the rate with your tax preparer.</p>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

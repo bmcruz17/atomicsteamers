@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;600&display=swap');
+  * { margin: 0; box-sizing: border-box; }
+  body { width: 1200px; height: 630px; overflow: hidden; font-family: "Inter", sans-serif; }
+  .wrap {
+    width: 1200px; height: 630px; position: relative; color: #fff; padding: 70px 80px;
+    display: flex; flex-direction: column; justify-content: center;
+    background:
+      radial-gradient(1000px 600px at 85% -10%, rgba(21,176,126,.55), transparent),
+      linear-gradient(150deg, #084d37 0%, #0b6e4f 55%, #0a5a41 100%);
+  }
+  .steam { position: absolute; inset: 0; opacity: .25;
+    background: radial-gradient(420px 320px at 80% 25%, rgba(255,255,255,.5), transparent 70%),
+               radial-gradient(380px 300px at 92% 70%, rgba(255,255,255,.3), transparent 70%); }
+  .dots { position: absolute; inset: 0; opacity: .4;
+    background-image: radial-gradient(rgba(255,255,255,.08) 2px, transparent 2px); background-size: 26px 26px; }
+  .brand { display: flex; align-items: center; gap: 16px; position: relative; margin-bottom: 34px; }
+  .mark { width: 64px; height: 64px; border-radius: 16px; display: grid; place-items: center;
+    background: linear-gradient(135deg, #15b07e, #0b6e4f); box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+  .mark svg { width: 44px; height: 44px; }
+  .brand b { font-family: "Poppins"; font-weight: 800; font-size: 34px; letter-spacing: .5px; }
+  .brand b span { color: #9be9cd; }
+  .eyebrow { position: relative; text-transform: uppercase; letter-spacing: .22em; font-weight: 700;
+    color: #f4a72c; font-size: 20px; margin-bottom: 16px; }
+  h1 { position: relative; font-family: "Poppins"; font-weight: 800; font-size: 84px; line-height: 1.02;
+    letter-spacing: -1px; margin-bottom: 22px; }
+  h1 .hl { color: #f4a72c; }
+  .sub { position: relative; font-size: 30px; color: #e7f5ee; font-weight: 600; margin-bottom: 40px; }
+  .row { position: relative; display: flex; gap: 18px; align-items: center; }
+  .phone { background: #f4a72c; color: #3a2a06; font-family: "Poppins"; font-weight: 800; font-size: 30px;
+    padding: 16px 30px; border-radius: 999px; }
+  .tags { font-size: 22px; color: #d9f0e6; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="steam"></div><div class="dots"></div>
+    <div class="brand">
+      <span class="mark">
+        <svg viewBox="0 0 64 64"><g fill="none" stroke="#fff" stroke-width="3">
+          <ellipse cx="32" cy="32" rx="18" ry="8"/>
+          <ellipse cx="32" cy="32" rx="18" ry="8" transform="rotate(60 32 32)"/>
+          <ellipse cx="32" cy="32" rx="18" ry="8" transform="rotate(120 32 32)"/>
+        </g><circle cx="32" cy="32" r="5" fill="#f4a72c"/></svg>
+      </span>
+      <b>Atomic<span>Steamers</span></b>
+    </div>
+    <div class="eyebrow">Oahu's Chemical-Free Bed Bug Specialists</div>
+    <h1>Bed Bug Removal<br/>in <span class="hl">Oahu</span></h1>
+    <div class="sub">352°F pure steam · No chemicals · Safe for keiki &amp; pets</div>
+    <div class="row">
+      <span class="phone">📞 844-88-STEAM</span>
+      <span class="tags">Free inspections · Island-wide</span>
+    </div>
+  </div>
+</body>
+</html>

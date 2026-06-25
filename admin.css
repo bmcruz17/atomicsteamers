@@ -1,0 +1,101 @@
+/* Atomic Steamers — Admin / Pipeline dashboard */
+:root{
+  --green:#0b6e4f; --green-dark:#084d37; --green-light:#15b07e;
+  --black:#0b0e0d; --sand:#f6f4ee; --ink:#1c2a25; --muted:#5c6b64;
+  --amber:#f4a72c; --white:#fff; --line:#e3e0d6; --radius:12px;
+  --shadow:0 8px 24px rgba(8,77,55,.12);
+  --font-body:"Inter",system-ui,sans-serif;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:var(--font-body);background:#eef1ee;color:var(--ink);}
+a{color:var(--green);text-decoration:none;}
+
+/* ---- Login ---- */
+.login-wrap{min-height:100vh;display:grid;place-items:center;
+  background:linear-gradient(165deg,#060807,#0c1411 60%,#0a1a14);padding:20px;}
+.login-card{background:#fff;border-radius:18px;padding:2.2rem;width:100%;max-width:380px;
+  box-shadow:0 20px 50px rgba(0,0,0,.35);border-top:6px solid var(--amber);}
+.login-card h1{font-size:1.5rem;margin:0 0 .2rem;}
+.login-card .brand-mark{display:inline-grid;place-items:center;width:42px;height:42px;
+  background:linear-gradient(135deg,var(--green-light),var(--green));color:#fff;border-radius:10px;
+  font-size:1.3rem;margin-bottom:.8rem;}
+.login-card p.sub{color:var(--muted);font-size:.9rem;margin:0 0 1.3rem;}
+.login-card label{display:block;font-weight:600;font-size:.85rem;margin:.6rem 0 .3rem;}
+.login-card input{width:100%;padding:.75em .9em;border:1.5px solid var(--line);border-radius:10px;
+  font-size:1rem;background:var(--sand);}
+.login-card input:focus{outline:none;border-color:var(--green-light);background:#fff;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4em;font-weight:600;
+  font-size:1rem;padding:.75em 1.3em;border-radius:999px;border:0;cursor:pointer;
+  background:var(--amber);color:#3a2a06;transition:background .2s,transform .15s;}
+.btn:hover{background:#ffb73f;transform:translateY(-1px);}
+.btn--block{width:100%;margin-top:1rem;}
+.btn--sm{padding:.4em .8em;font-size:.82rem;}
+.btn--ghost{background:#eef1ee;color:var(--ink);}
+.btn--ghost:hover{background:#e2e7e3;}
+.msg{font-size:.88rem;margin-top:.8rem;min-height:1.1em;text-align:center;}
+.msg.error{color:#c0392b;} .msg.ok{color:var(--green);}
+.login-back{display:block;text-align:center;margin-top:1rem;font-size:.85rem;color:var(--muted);}
+
+/* ---- App shell ---- */
+.topbar{background:var(--black);color:#fff;display:flex;align-items:center;justify-content:space-between;
+  padding:.7rem 1.2rem;position:sticky;top:0;z-index:20;}
+.topbar .brand{display:flex;align-items:center;gap:.5rem;font-weight:700;}
+.topbar .brand-mark{display:inline-grid;place-items:center;width:30px;height:30px;
+  background:linear-gradient(135deg,var(--green-light),var(--green));border-radius:8px;}
+.topbar .user{font-size:.85rem;color:#bcd;display:flex;align-items:center;gap:.8rem;}
+
+.tabs{display:flex;gap:.4rem;padding:.8rem 1.2rem 0;background:#fff;border-bottom:1px solid var(--line);
+  position:sticky;top:48px;z-index:15;flex-wrap:wrap;}
+.tab{padding:.6em 1.1em;border-radius:10px 10px 0 0;cursor:pointer;font-weight:600;font-size:.92rem;
+  color:var(--muted);border:1px solid transparent;border-bottom:0;}
+.tab.active{color:var(--green-dark);background:#eef6f1;border-color:var(--line);}
+.tab .count{display:inline-block;background:var(--amber);color:#3a2a06;border-radius:999px;
+  padding:0 .5em;font-size:.75rem;margin-left:.35em;}
+
+.view{padding:1.2rem;}
+.hidden{display:none;}
+.loading{padding:2rem;text-align:center;color:var(--muted);}
+
+/* ---- Kanban ---- */
+.board{display:flex;gap:1rem;overflow-x:auto;padding-bottom:1rem;}
+.col{background:#fff;border:1px solid var(--line);border-radius:var(--radius);min-width:255px;width:255px;
+  flex:0 0 auto;display:flex;flex-direction:column;max-height:78vh;}
+.col__head{padding:.7rem .9rem;font-weight:700;font-size:.9rem;border-bottom:1px solid var(--line);
+  position:sticky;top:0;background:#fff;border-radius:var(--radius) var(--radius) 0 0;display:flex;
+  justify-content:space-between;align-items:center;}
+.col__head .n{background:#eef1ee;border-radius:999px;padding:0 .55em;font-size:.78rem;color:var(--muted);}
+.col__body{padding:.6rem;overflow-y:auto;flex:1;min-height:60px;}
+.col__body.dragover{background:#eef6f1;outline:2px dashed var(--green-light);outline-offset:-4px;}
+.jobcard{background:#fff;border:1px solid var(--line);border-left:4px solid var(--green);border-radius:10px;
+  padding:.7rem .8rem;margin-bottom:.6rem;box-shadow:0 2px 6px rgba(8,77,55,.06);cursor:grab;}
+.jobcard:active{cursor:grabbing;}
+.jobcard.tag-sanitizing{border-left-color:var(--amber);}
+.jobcard h4{margin:0 0 .25rem;font-size:.95rem;}
+.jobcard .meta{font-size:.78rem;color:var(--muted);display:grid;gap:.15rem;}
+.jobcard .pill{display:inline-block;font-size:.68rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.04em;padding:.1em .5em;border-radius:999px;background:#eef6f1;color:var(--green-dark);}
+.jobcard .pill.sanitizing{background:#fdf0d8;color:#8a5a00;}
+.jobcard .amt{font-weight:700;color:var(--ink);}
+
+/* ---- Leads inbox ---- */
+.leadlist,.tax-table{max-width:760px;}
+.lead{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.1rem;
+  margin-bottom:.8rem;box-shadow:var(--shadow);}
+.lead h4{margin:0 0 .3rem;}
+.lead .meta{font-size:.85rem;color:var(--muted);margin-bottom:.5rem;}
+.lead .actions{display:flex;gap:.5rem;}
+.empty{color:var(--muted);padding:1.4rem;text-align:center;background:#fff;border-radius:var(--radius);
+  border:1px dashed var(--line);}
+
+/* ---- Tax table ---- */
+table{border-collapse:collapse;width:100%;background:#fff;border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow);}
+th,td{padding:.7rem .9rem;text-align:left;border-bottom:1px solid var(--line);font-size:.9rem;}
+th{background:#eef6f1;color:var(--green-dark);font-weight:700;}
+td.num,th.num{text-align:right;}
+.tax-note{font-size:.82rem;color:var(--muted);margin-top:.8rem;max-width:760px;}
+
+@media(max-width:600px){
+  .col,.board{min-width:0;}
+  .col{width:85vw;}
+}
