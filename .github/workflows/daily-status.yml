@@ -1,0 +1,32 @@
+name: Daily status refresh
+
+on:
+  schedule:
+    - cron: "0 11 * * *"   # 11:00 UTC = 1:00am HST (Hawaii, UTC-10)
+  workflow_dispatch:        # allow manual run from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Refresh STATUS.md
+        run: bash scripts/update-status.sh
+
+      - name: Commit if changed
+        run: |
+          git config user.name "atomic-steamers-bot"
+          git config user.email "actions@github.com"
+          if ! git diff --quiet STATUS.md; then
+            git add STATUS.md
+            git commit -m "chore: daily STATUS.md refresh"
+            git push origin main
+          else
+            echo "No STATUS.md changes."
+          fi
