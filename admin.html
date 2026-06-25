@@ -4,24 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Atomic Steamers — Staff Dashboard</title>
+  <title>Atomic Steamers — Dashboard</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="admin.css" />
 </head>
 <body>
+  <!-- Brand mark reused -->
+  <template id="brandTpl">
+    <span class="mark"><svg viewBox="0 0 64 64"><g fill="none" stroke="#fff" stroke-width="4">
+      <ellipse cx="32" cy="32" rx="18" ry="8"/>
+      <ellipse cx="32" cy="32" rx="18" ry="8" transform="rotate(60 32 32)"/>
+      <ellipse cx="32" cy="32" rx="18" ry="8" transform="rotate(120 32 32)"/>
+    </g><circle cx="32" cy="32" r="5" fill="#f4a72c"/></svg></span>
+  </template>
+
   <!-- Login -->
   <div class="login-wrap" id="loginWrap">
     <form class="login-card" id="loginForm">
-      <span class="brand-mark">⚛︎</span>
+      <div class="brand" style="font-size:1.3rem;margin-bottom:.6rem;"><span class="mark"><svg viewBox="0 0 64 64"><g fill="none" stroke="#fff" stroke-width="4"><ellipse cx="32" cy="32" rx="18" ry="8"/><ellipse cx="32" cy="32" rx="18" ry="8" transform="rotate(60 32 32)"/><ellipse cx="32" cy="32" rx="18" ry="8" transform="rotate(120 32 32)"/></g><circle cx="32" cy="32" r="5" fill="#f4a72c"/></svg></span>Atomic<span class="accent">Steamers</span></div>
       <h1>Staff Dashboard</h1>
       <p class="sub">Sign in to manage leads, jobs, billing &amp; GET.</p>
       <label for="email">Email</label>
       <input id="email" type="email" autocomplete="username" required />
       <label for="password">Password</label>
       <input id="password" type="password" autocomplete="current-password" required />
-      <button class="btn btn--block" type="submit">Sign In</button>
+      <button class="btn btn--green" type="submit" style="width:100%;justify-content:center;margin-top:1rem;">Sign In</button>
       <p class="msg" id="loginMsg"></p>
       <a class="login-back" href="index.html">← Back to website</a>
     </form>
@@ -29,34 +38,47 @@
 
   <!-- App -->
   <div id="app" class="hidden">
-    <div class="topbar">
-      <div class="brand"><span class="brand-mark">⚛︎</span> Atomic Steamers</div>
-      <div class="user"><span id="whoami"></span>
-        <button class="btn btn--sm btn--ghost" id="logoutBtn">Sign out</button>
+    <div class="appbar">
+      <div class="brand"><span class="mark"><svg viewBox="0 0 64 64"><g fill="none" stroke="#fff" stroke-width="4"><ellipse cx="32" cy="32" rx="18" ry="8"/><ellipse cx="32" cy="32" rx="18" ry="8" transform="rotate(60 32 32)"/><ellipse cx="32" cy="32" rx="18" ry="8" transform="rotate(120 32 32)"/></g><circle cx="32" cy="32" r="5" fill="#f4a72c"/></svg></span>Atomic<span class="accent">Steamers</span></div>
+      <div class="appbar__right">
+        <span class="appbar__email" id="whoami"></span>
+        <button class="btn btn--sm" id="logoutBtn">Sign out</button>
       </div>
     </div>
 
     <div class="tabs">
-      <div class="tab active" data-view="board">Pipeline Board</div>
-      <div class="tab" data-view="leads">New Leads <span class="count" id="leadCount">0</span></div>
-      <div class="tab" data-view="taxes">GET / Taxes</div>
+      <div class="tab active" data-view="board">Pipeline</div>
+      <div class="tab" data-view="customers">Customers</div>
+      <div class="tab" data-view="money">Money</div>
+      <div class="tab" data-view="leads">New Leads</div>
     </div>
 
-    <!-- Board -->
+    <!-- Pipeline -->
     <section class="view" id="view-board">
+      <div class="vhead">
+        <div><h1>Pipeline</h1><p>Drag jobs across stages, from new lead to paid.</p></div>
+        <button class="btn btn--green" id="addCustomerBtn">+ Add customer</button>
+      </div>
       <div class="board" id="board"><div class="loading">Loading board…</div></div>
+    </section>
+
+    <!-- Customers -->
+    <section class="view hidden" id="view-customers">
+      <div class="vhead"><div><h1>Customers</h1><p>Everyone in your book.</p></div></div>
+      <div id="customerTable"><div class="loading">Loading…</div></div>
+    </section>
+
+    <!-- Money -->
+    <section class="view hidden" id="view-money">
+      <div class="vhead"><div><h1>Money</h1><p>GET owed to Hawaii, by month (paid invoices, cash basis).</p></div></div>
+      <div id="moneyTable"><div class="loading">Loading…</div></div>
+      <p class="note">File Form G-45 each period and G-49 annually with Hawaii DOTAX. GET rate (Oahu 4.712%) is set per invoice — confirm with your tax preparer.</p>
     </section>
 
     <!-- Leads -->
     <section class="view hidden" id="view-leads">
-      <div class="leadlist" id="leadList"><div class="loading">Loading leads…</div></div>
-    </section>
-
-    <!-- Taxes -->
-    <section class="view hidden" id="view-taxes">
-      <div class="tax-table" id="taxTable"><div class="loading">Loading…</div></div>
-      <p class="tax-note">GET shown on <strong>paid</strong> invoices, grouped by month (cash basis).
-        File Form G-45 each period and G-49 annually with Hawaii DOTAX. Confirm the rate with your tax preparer.</p>
+      <div class="vhead"><div><h1>New Leads</h1><p>Website inspection requests. Add them to the pipeline.</p></div></div>
+      <div id="leadList"><div class="loading">Loading…</div></div>
     </section>
   </div>
 
