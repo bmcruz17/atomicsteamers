@@ -85,7 +85,7 @@ TEMPLATE = """<!DOCTYPE html>
     "telephone": "+1-808-470-2500",
     "email": "hello@atomicsteamers.com",
     "image": "{site}/og-image.png",
-    "sameAs": ["https://www.instagram.com/atomicsteamers/", "https://www.facebook.com/profile.php?id=61577767423753"],
+    "sameAs": ["https://www.instagram.com/atomicsteamers/", "https://www.facebook.com/profile.php?id=61577767423753", "https://share.google/Wm81LHvfo12r0ntH7"],
     "areaServed": {{ "@type": "City", "name": "{town}, Hawaii" }},
     "address": {{ "@type": "PostalAddress", "addressLocality": "{town}", "addressRegion": "HI", "addressCountry": "US" }},
     "geo": {{ "@type": "GeoCoordinates", "latitude": {lat}, "longitude": {lng} }},
