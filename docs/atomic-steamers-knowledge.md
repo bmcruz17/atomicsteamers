@@ -27,7 +27,7 @@ Keep it updated as things change.
 
 ## 2. Contact (real, live)
 
-- **Phone:** 844-88-STEAM → **844-887-8326** (`tel:+18448878326`)
+- **Phone:** (808) 470-2500 → **808-470-2500** (`tel:+18084702500`)
 - **Email:** **hello@atomicsteamers.com** (Google Workspace)
 - **Hours:** 7 days, 7am–7pm
 

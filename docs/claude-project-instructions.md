@@ -21,7 +21,7 @@ project knowledge file — read it before answering anything non-trivial.
   logo). Lead with bed bugs; sanitizing/turnover is secondary. Prefer real photos.
 - **Never** put the founders' personal names on the public site — use "locally
   owned & operated."
-- Phone **844-88-STEAM**, email **hello@atomicsteamers.com**.
+- Phone **(808) 470-2500**, email **hello@atomicsteamers.com**.
 
 **Integrity**
 - Be honest about limits and uncertainty (cache, DNS propagation, separate

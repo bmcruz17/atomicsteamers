@@ -56,7 +56,7 @@ TEMPLATE = """<!DOCTYPE html>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HK43ZRDYP"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-1HK43ZRDYP');</script>
   <title>Bed Bug Removal in {town}, Oahu | Chemical-Free Steam | Atomic Steamers</title>
-  <meta name="description" content="Chemical-free 352°F steam bed bug removal in {town}, Oahu. Kills bed bugs and eggs on contact — safe for keiki & pets, keep your furniture. Free inspections. Call 844-88-STEAM." />
+  <meta name="description" content="Chemical-free 352°F steam bed bug removal in {town}, Oahu. Kills bed bugs and eggs on contact — safe for keiki & pets, keep your furniture. Free inspections. Call (808) 470-2500." />
   <meta name="keywords" content="bed bug removal {town}, bed bug treatment {town}, bed bug exterminator {town}, bed bug heat treatment {town} Oahu, Atomic Steamers" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#0b6e4f" />
@@ -67,7 +67,7 @@ TEMPLATE = """<!DOCTYPE html>
   <meta name="ICBM" content="{lat}, {lng}" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Bed Bug Removal in {town}, Oahu | Atomic Steamers" />
-  <meta property="og:description" content="352°F chemical-free steam kills bed bugs on contact in {town}. Free inspections. Call 844-88-STEAM." />
+  <meta property="og:description" content="352°F chemical-free steam kills bed bugs on contact in {town}. Free inspections. Call (808) 470-2500." />
   <meta property="og:url" content="{site}/bed-bug-removal-{slug}/" />
   <meta property="og:image" content="{site}/og-image.png" />
   <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
@@ -82,7 +82,7 @@ TEMPLATE = """<!DOCTYPE html>
     "name": "Atomic Steamers — Bed Bug Removal in {town}",
     "description": "Chemical-free 352°F steam bed bug removal serving {town}, Oahu, Hawaii.",
     "url": "{site}/bed-bug-removal-{slug}/",
-    "telephone": "+1-844-887-8326",
+    "telephone": "+1-808-470-2500",
     "email": "hello@atomicsteamers.com",
     "image": "{site}/og-image.png",
     "areaServed": {{ "@type": "City", "name": "{town}, Hawaii" }},
@@ -96,7 +96,7 @@ TEMPLATE = """<!DOCTYPE html>
   <div class="topbar">
     <div class="container topbar__inner">
       <span class="topbar__item">🌺 Serving {town} &amp; all of Oahu</span>
-      <a class="topbar__item topbar__phone" href="tel:+18448878326">📞 844-88-STEAM</a>
+      <a class="topbar__item topbar__phone" href="tel:+18084702500">📞 (808) 470-2500</a>
     </div>
   </div>
 
@@ -128,7 +128,7 @@ TEMPLATE = """<!DOCTYPE html>
           <h1>Bed Bug Removal<br /><span class="hl">in {town}</span></h1>
           <p class="hero__lead">{intro}</p>
           <div class="hero__cta">
-            <a href="tel:+18448878326" class="btn btn--primary">📞 Call 844-88-STEAM</a>
+            <a href="tel:+18084702500" class="btn btn--primary">📞 Call (808) 470-2500</a>
             <a href="#contact" class="btn btn--ghost">Free Inspection</a>
           </div>
           <ul class="hero__badges"><li>✓ 352°F steam</li><li>✓ Safe for keiki &amp; pets</li><li>✓ Same-week service</li></ul>
@@ -229,7 +229,7 @@ TEMPLATE = """<!DOCTYPE html>
           <h2>Free {town} inspection</h2>
           <p>Bed bugs only get worse with time. Reach out for a fast, chemical-free plan to take your {town} home back.</p>
           <ul class="contact__list">
-            <li><span>📞</span> <a href="tel:+18448878326">844-88-STEAM (844-887-8326)</a></li>
+            <li><span>📞</span> <a href="tel:+18084702500">(808) 470-2500 (808-470-2500)</a></li>
             <li><span>✉️</span> <a href="mailto:hello@atomicsteamers.com">hello@atomicsteamers.com</a></li>
             <li><span>📍</span> {town} &amp; all of Oahu · Open 7 days</li>
           </ul>
@@ -263,14 +263,14 @@ TEMPLATE = """<!DOCTYPE html>
         <a href="/">Home</a><a href="/#why">Why Steam</a><a href="/#services">Services</a><a href="/#faq">FAQ</a><a href="#contact">Free Inspection</a>
       </nav>
       <div class="footer__contact">
-        <a href="tel:+18448878326">📞 844-88-STEAM</a>
+        <a href="tel:+18084702500">📞 (808) 470-2500</a>
         <a href="mailto:hello@atomicsteamers.com">✉️ hello@atomicsteamers.com</a>
       </div>
     </div>
     <div class="footer__bar"><p>&copy; <span id="year"></span> Atomic Steamers · Bed Bug Removal in {town}, Oahu 🌺 · <a href="/admin.html">Staff Login</a></p></div>
   </footer>
 
-  <a href="tel:+18448878326" class="sticky-call" aria-label="Call Atomic Steamers">📞 Call 844-88-STEAM</a>
+  <a href="tel:+18084702500" class="sticky-call" aria-label="Call Atomic Steamers">📞 Call (808) 470-2500</a>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/supabase-config.js"></script>
   <script src="/script.js"></script>

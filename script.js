@@ -56,7 +56,7 @@
           else { alert("Mahalo! We received your request and will be in touch shortly."); }
           form.reset();
         } else if (statusEl) {
-          statusEl.textContent = "Something went wrong — please call us at 844-88-STEAM.";
+          statusEl.textContent = "Something went wrong — please call us at (808) 470-2500.";
           statusEl.className = "form-status";
         }
       });

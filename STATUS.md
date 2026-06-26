@@ -59,7 +59,7 @@ curl -s 'https://dns.google/resolve?name=atomicsteamers.com&type=MX' | python3 -
 ## 🔎 SEO — get found on "bed bugs Oahu" (highest leverage, do in order)
 
 - [ ] **Google Business Profile** (business.google.com) — category Pest Control
-      Service, Oahu service area, real Optima photos, 844-88-STEAM, hours, website,
+      Service, Oahu service area, real Optima photos, (808) 470-2500, hours, website,
       then verify. (The map pack is what shows first for "bed bugs Oahu".)
 - [ ] **Google Search Console** — add atomicsteamers.com, verify via Cloudflare DNS,
       submit sitemap `https://atomicsteamers.com/sitemap.xml`, Request Indexing on `/`.
@@ -87,7 +87,7 @@ curl -s 'https://dns.google/resolve?name=atomicsteamers.com&type=MX' | python3 -
 
 ## ✅ Done (recent)
 
-- Site rebuilt: green theme, bed-bug focus, real phone (844-88-STEAM) + hello@ email,
+- Site rebuilt: green theme, bed-bug focus, real phone ((808) 470-2500) + hello@ email,
   352°F hook, SEO (geo meta, FAQ + business schema, robots.txt, sitemap), favicon,
   social OG image, Google Analytics.
 - GitHub Pages live on `main` at atomicsteamers.com; Cloudflare DNS (apex + www); email flowing.
