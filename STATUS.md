@@ -56,6 +56,21 @@ curl -s 'https://dns.google/resolve?name=atomicsteamers.com&type=MX' | python3 -
 - [ ] **Delete the `__CONNECTION TEST__` row** in Supabase → Table Editor → `leads`.
 - [ ] **Clear Safari cache / re-add the favorite** so the favicon shows the green atom.
 
+## 🔎 SEO — get found on "bed bugs Oahu" (highest leverage, do in order)
+
+- [ ] **Google Business Profile** (business.google.com) — category Pest Control
+      Service, Oahu service area, real Optima photos, 844-88-STEAM, hours, website,
+      then verify. (The map pack is what shows first for "bed bugs Oahu".)
+- [ ] **Google Search Console** — add atomicsteamers.com, verify via Cloudflare DNS,
+      submit sitemap `https://atomicsteamers.com/sitemap.xml`, Request Indexing on `/`.
+      (As of 2026-06-26 the site is NOT yet indexed — this fixes that.)
+- [ ] **Bing Webmaster Tools** — add site + submit sitemap (quick win).
+- [ ] **Reviews** — get first 5–10 real Google reviews after GBP is live.
+- [ ] **Citations** — Yelp, Apple Maps, Nextdoor, Thumbtack, Angi; identical
+      name/phone/website everywhere.
+- [ ] **Content/backlinks (ongoing)** — per-town pages + local blog posts; links
+      from local Hawaii sites.
+
 ## 🟡 In progress
 
 - [ ] Replace the 3 **sample testimonials** with real customer reviews.
