@@ -35,6 +35,16 @@ TOWNS = [
      "Central Oahu — Pearl City, Aiea, and Waipahu — sits near the base and the islands' busiest shopping. "
      "Military moves and frequent travel bring bed bugs in; we treat them fast with safe, chemical-free steam.",
      ["Aiea", "Waipahu", "Pearl Harbor", "Waimalu"]),
+    ("kalihi", "Kalihi", 21.3270, -157.8700,
+     "Kalihi is one of Honolulu's most densely populated neighborhoods — apartments and multi-unit buildings "
+     "where bed bugs spread fast between units. Atomic Steamers treats Kalihi homes and apartments with "
+     "352-degree chemical-free steam that kills bed bugs and their eggs on contact.",
+     ["Kalihi Valley", "Kalihi Kai", "Kapālama", "Kamehameha Heights"]),
+    ("waianae", "Waianae", 21.4370, -158.1850,
+     "The Waianae Coast — from Nanakuli to Makaha — is tight-knit and far from town, so fast local bed bug "
+     "help matters. Atomic Steamers brings chemical-free 352-degree steam treatment to the west side, killing "
+     "bed bugs and their eggs without harsh chemicals in your home.",
+     ["Nanakuli", "Maili", "Makaha", "Lualualei"]),
 ]
 
 ALL = [(s, t) for (s, t, *_ ) in TOWNS]
