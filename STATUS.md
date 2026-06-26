@@ -1,6 +1,6 @@
 # Atomic Steamers — Daily Status
 
-> **Last updated:** <!--LAST_UPDATED-->2026-06-25<!--/LAST_UPDATED--> · auto-refreshed daily ~1am HST
+> **Last updated:** <!--LAST_UPDATED-->2026-06-26<!--/LAST_UPDATED--> · auto-refreshed daily ~1am HST
 > This is the daily handoff. The 1am routine refreshes it so the next day picks up
 > where we left off. Read this top-to-bottom before starting work.
 
@@ -33,7 +33,7 @@ curl -s 'https://dns.google/resolve?name=atomicsteamers.com&type=MX' | python3 -
 | Check | Last result |
 |---|---|
 | Website (atomicsteamers.com) | ✅ live (HTTP 200) |
-| Domain registry status | ✅ active — registrar Squarespace Domains LLC |
+| Domain registry status | ✅ active — registrar Squarespace Domains LLC · transfer pending |
 | Email (MX → Google) | ✅ resolving |
 | Google Analytics | ✅ live (G-1HK43ZRDYP) |
 | Supabase backend | ✅ connected (form → leads) |
@@ -88,4 +88,5 @@ curl -s 'https://dns.google/resolve?name=atomicsteamers.com&type=MX' | python3 -
 ## 🗓️ Daily log
 
 <!--LOG-->
+- **2026-06-26** — Auto health check. All monitored checks green.
 - **2026-06-25** — Created STATUS.md + 1am refresh routine. Site, domain, email, GA all healthy. Open items: domain transfer, run migration 0002, staff login, test-row cleanup, favicon cache.

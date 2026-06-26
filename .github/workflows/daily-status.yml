@@ -19,14 +19,10 @@ jobs:
       - name: Refresh STATUS.md
         run: bash scripts/update-status.sh
 
-      - name: Commit if changed
+      - name: Commit daily (always, to keep the repo + schedule active)
         run: |
           git config user.name "atomic-steamers-bot"
           git config user.email "actions@github.com"
-          if ! git diff --quiet STATUS.md; then
-            git add STATUS.md
-            git commit -m "chore: daily STATUS.md refresh"
-            git push origin main
-          else
-            echo "No STATUS.md changes."
-          fi
+          git add STATUS.md
+          git commit --allow-empty -m "chore: daily STATUS.md refresh ($(date -u +%Y-%m-%d))"
+          git push origin main
