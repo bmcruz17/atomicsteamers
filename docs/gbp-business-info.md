@@ -29,9 +29,22 @@ https://atomicsteamers.com
 - Vacation rental / Airbnb turnover cleaning
 - Move-out cleaning
 
-## Business description (paste into "Description" — under 750 characters)
+## Business description (paste into "Description")
+⚠️ Google rejects descriptions that contain a PHONE NUMBER, a URL/link, or ALL-CAPS
+words. This version has none — use it as-is.
 
-Atomic Steamers is Oahu's chemical-free bed bug removal specialist. We use commercial-grade 352°F steam — the Optima Steamer XD — to kill bed bugs and their eggs on contact, with no pesticides, no toxic residue, and no need to throw out your furniture. It's a safe heat treatment for your keiki and pets. We treat homes, condos, apartments, hotels, and vacation rentals island-wide: Honolulu, Waikiki, Kailua, Kapolei, Kaneohe, Pearl City and beyond. Locally owned and operated, registered in Hawaii, open 7 days a week with same-week appointments and free inspections. We also offer steam sanitizing and rental/move-out turnover cleaning. Call (808) 470-2500 for a free inspection.
+Atomic Steamers is Oahu's chemical-free bed bug specialist. We use commercial-grade 352-degree steam to kill bed bugs and their eggs on contact — no pesticides, no toxic residue, and no need to throw out your furniture. It's a safe heat treatment for children and pets. We serve homes, condos, apartments, hotels, and vacation rentals across Oahu, including Honolulu, Waikiki, Kailua, Kapolei, Kaneohe, and Pearl City. Locally owned and operated and registered in Hawaii, with same-week appointments and free inspections. We also provide steam sanitizing and rental and move-out turnover cleaning.
+
+## If edits keep getting rejected / not approved
+- **Description rejected** → it contained a phone number, URL, or ALL-CAPS. Use the version above.
+- **"Pest control service" category rejected** → pest control is a regulated category;
+  Google may want proof of a Hawaii structural pest-control license.
+  - If licensed (or steam-only is exempt): add it as a **secondary** category first
+    (keep Cleaners primary) — secondary categories rarely get blocked.
+  - If not licensed: use **Sanitation service / Cleaning service** categories and rank
+    via the website instead. Confirm licensing needs with the State of Hawaii.
+- Make **one change at a time** and wait; batch edits trigger manual review.
+- Ensure the profile is **verified**; if it keeps reverting, use GBP → **Contact support**.
 
 ## Also do
 - **Photos:** upload your real Optima XD shots (panel, crew on-site, steam in action) — profiles with photos rank and convert better.
