@@ -27,7 +27,7 @@ Keep it updated as things change.
 
 ## 2. Contact (real, live)
 
-- **Phone:** (808) 470-2500 → **808-470-2500** (`tel:+18084702500`)
+- **Phone:** (808) 265-5339 → **808-265-5339** (`tel:+18082655339`)
 - **Email:** **hello@atomicsteamers.com** (Google Workspace)
 - **Hours:** 7 days, 7am–7pm
 

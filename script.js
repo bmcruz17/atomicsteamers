@@ -58,7 +58,7 @@
           else { alert("Mahalo! We received your request and will be in touch shortly."); }
           form.reset();
         } else if (statusEl) {
-          statusEl.textContent = "Something went wrong — please call us at (808) 470-2500.";
+          statusEl.textContent = "Something went wrong — please call us at (808) 265-5339.";
           statusEl.className = "form-status";
         }
       });

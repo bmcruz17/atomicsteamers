@@ -44,7 +44,7 @@ h1 .hl{{color:#f4a72c}}
     <div class="eyebrow">{eyebrow}</div>
     <h1>{headline}</h1>
     <div class="sub">{sub}</div>
-    <div class="cta">📞 Free Inspection · (808) 470-2500</div>
+    <div class="cta">📞 Free Inspection · (808) 265-5339</div>
   </div>
 </div></body></html>"""
 

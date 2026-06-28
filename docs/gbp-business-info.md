@@ -14,7 +14,7 @@ Atomic Steamers
 - Sanitation service
 
 ## Phone
-(808) 470-2500   ← must match the website
+(808) 265-5339   ← must match the website
 
 ## Website
 https://atomicsteamers.com
