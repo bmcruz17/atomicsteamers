@@ -65,6 +65,7 @@ TEMPLATE = """<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HK43ZRDYP"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-1HK43ZRDYP');</script>
+  <script src="/meta-pixel.js"></script>
   <title>Bed Bug Removal in {town}, Oahu | Chemical-Free Steam | Atomic Steamers</title>
   <meta name="description" content="Chemical-free 352°F steam bed bug removal in {town}, Oahu. Kills bed bugs and eggs on contact — safe for keiki & pets, keep your furniture. Free inspections. Call (808) 470-2500." />
   <meta name="keywords" content="bed bug removal {town}, bed bug treatment {town}, bed bug exterminator {town}, bed bug heat treatment {town} Oahu, Atomic Steamers" />

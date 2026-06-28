@@ -52,6 +52,8 @@
         if (btn) { btn.disabled = false; }
         var firstName = name.split(" ")[0];
         if (res.ok) {
+          if (window.fbq) window.fbq("track", "Lead");           // Meta ad conversion
+          if (window.gtag) window.gtag("event", "generate_lead"); // GA conversion
           if (statusEl) { statusEl.textContent = "Mahalo, " + firstName + "! We got your request and will call you shortly."; statusEl.className = "form-status success"; }
           else { alert("Mahalo! We received your request and will be in touch shortly."); }
           form.reset();
