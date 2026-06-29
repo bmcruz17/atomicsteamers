@@ -103,7 +103,9 @@
             <form class="quote-card__form" id="heroForm" novalidate>
               <input name="name" type="text" placeholder="Name" required />
               <input name="phone" type="tel" placeholder="Phone number" required />
-              <input name="area" type="text" value="Vessel — Honolulu Harbor" />
+              <input name="address" type="text" placeholder="Harbor / dock / pier" required />
+              <input name="area" type="hidden" value="Vessel — Honolulu Harbor" />
+              <textarea name="message" rows="2" placeholder="Vessel type & situation (e.g. 50' longline, crew quarters…)" required></textarea>
               <button type="submit" class="btn btn--primary btn--block">Request Service</button>
             </form>
           </div>
@@ -232,8 +234,9 @@
               <div class="field"><label for="cf-phone">Phone</label><input id="cf-phone" name="phone" type="tel" required /></div>
               <div class="field"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" /></div>
             </div>
-            <div class="field"><label for="cf-area">Harbor / Dock</label><input id="cf-area" name="area" type="text" value="Vessel — Honolulu Harbor" /></div>
-            <div class="field"><label for="cf-message">Vessel type &amp; situation</label><textarea id="cf-message" name="message" rows="3" placeholder="e.g. 50' longline fishing boat, crew quarters, docked at Pier 38…"></textarea></div>
+            <div class="field"><label for="cf-address">Harbor / dock / pier</label><input id="cf-address" name="address" type="text" placeholder="e.g. Pier 38, Honolulu Harbor" required /></div>
+            <input id="cf-area" name="area" type="hidden" value="Vessel — Honolulu Harbor" />
+            <div class="field"><label for="cf-message">Vessel type &amp; situation</label><textarea id="cf-message" name="message" rows="3" placeholder="e.g. 50' longline fishing boat, crew quarters, docked at Pier 38…" required></textarea></div>
             <button type="submit" class="btn btn--primary btn--block">Send Request</button>
             <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
           </form>

@@ -35,10 +35,12 @@
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var get = function (n) { var el = form.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ""; };
-      var name = get("name"), phone = get("phone");
+      var name = get("name"), phone = get("phone"), address = get("address"), message = get("message");
 
-      if (!name || !phone) {
-        if (statusEl) { statusEl.textContent = "Please add your name and phone so we can reach you."; statusEl.className = "form-status"; }
+      if (!name || !phone || !address || !message) {
+        var msg = "Please add your name, phone, service address, and a short description so we can help.";
+        if (statusEl) { statusEl.textContent = msg; statusEl.className = "form-status"; }
+        else { alert(msg); }
         return;
       }
 
@@ -47,7 +49,7 @@
 
       submitLead({
         name: name, phone: phone, email: get("email") || null,
-        town: get("area") || null, message: get("message") || null, source: "website"
+        address: address, town: get("area") || null, message: message, source: "website"
       }).then(function (res) {
         if (btn) { btn.disabled = false; }
         var firstName = name.split(" ")[0];

@@ -92,7 +92,9 @@
             <form class="quote-card__form" id="heroForm" novalidate>
               <input name="name" type="text" placeholder="Your name" required />
               <input name="phone" type="tel" placeholder="Phone number" required />
-              <input name="area" type="text" value="Waikiki" />
+              <input name="address" type="text" placeholder="Service address" required />
+              <input name="area" type="hidden" value="Waikiki" />
+              <textarea name="message" rows="2" placeholder="What's going on? (rooms affected, how long…)" required></textarea>
               <button type="submit" class="btn btn--primary btn--block">Request Inspection</button>
             </form>
           </div>
@@ -203,8 +205,9 @@
               <div class="field"><label for="cf-phone">Phone</label><input id="cf-phone" name="phone" type="tel" required /></div>
               <div class="field"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" /></div>
             </div>
+            <div class="field"><label for="cf-address">Service address</label><input id="cf-address" name="address" type="text" placeholder="Street, city" required /></div>
             <div class="field"><label for="cf-area">Town / Neighborhood</label><input id="cf-area" name="area" type="text" value="Waikiki" /></div>
-            <div class="field"><label for="cf-message">How can we help?</label><textarea id="cf-message" name="message" rows="3" placeholder="Tell us about your situation…"></textarea></div>
+            <div class="field"><label for="cf-message">Describe the problem</label><textarea id="cf-message" name="message" rows="3" placeholder="Rooms affected, how long, how bad…" required></textarea></div>
             <button type="submit" class="btn btn--primary btn--block">Send Request</button>
             <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
           </form>

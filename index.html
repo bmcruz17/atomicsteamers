@@ -166,8 +166,10 @@
               <input id="hf-name" name="name" type="text" placeholder="Your name" required />
               <label class="sr-only" for="hf-phone">Phone</label>
               <input id="hf-phone" name="phone" type="tel" placeholder="Phone number" required />
-              <label class="sr-only" for="hf-area">Area</label>
-              <input id="hf-area" name="area" type="text" placeholder="Town (e.g. Waikiki)" />
+              <label class="sr-only" for="hf-address">Service address</label>
+              <input id="hf-address" name="address" type="text" placeholder="Service address" required />
+              <label class="sr-only" for="hf-message">What's going on?</label>
+              <textarea id="hf-message" name="message" rows="2" placeholder="What's going on? (rooms affected, how long…)" required></textarea>
               <button type="submit" class="btn btn--primary btn--block">Request Inspection</button>
             </form>
           </div>
@@ -436,12 +438,16 @@
               </div>
             </div>
             <div class="field">
+              <label for="cf-address">Service address</label>
+              <input id="cf-address" name="address" type="text" placeholder="Street, city" required />
+            </div>
+            <div class="field">
               <label for="cf-area">Town</label>
               <input id="cf-area" name="area" type="text" placeholder="e.g. Honolulu, Kailua, Waikiki" />
             </div>
             <div class="field">
-              <label for="cf-message">How can we help?</label>
-              <textarea id="cf-message" name="message" rows="3" placeholder="Tell us about your situation…"></textarea>
+              <label for="cf-message">Describe the problem</label>
+              <textarea id="cf-message" name="message" rows="3" placeholder="Rooms affected, how long, how bad…" required></textarea>
             </div>
             <button type="submit" class="btn btn--primary btn--block">Send Request</button>
             <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
