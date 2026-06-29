@@ -333,7 +333,8 @@
           '<div class="card__sub">' + esc([l.town, l.service_type].filter(Boolean).join(" · ") || "website") + "</div>" +
           (l.phone ? '<div class="card__phone">📞 ' + esc(l.phone) + "</div>" : "") +
           (l.email ? '<div class="card__phone">✉️ ' + esc(l.email) + "</div>" : "") +
-          (l.message ? '<div class="note-line">💬 ' + esc(l.message).slice(0, 120) + "</div>" : "") +
+          (l.address ? '<div class="card__phone">📍 ' + esc(l.address) + "</div>" : "") +
+          (l.message ? '<div class="note-line">💬 ' + esc(l.message).slice(0, 160) + "</div>" : "") +
           '<div class="acts"><span class="pill pill--gray">' + ago(l.created_at) + '</span><span class="spacer"></span>' +
           '<button class="btn btn--green btn--sm" data-convert="' + l.id + '">→ Add to Pipeline</button></div>' +
           "</div>";
@@ -350,7 +351,7 @@
   }
   function convertLead(id, leads) {
     var lead = leads.filter(function (l) { return l.id === id; })[0]; if (!lead) return;
-    db.from("customers").insert({ name: lead.name, phone: lead.phone, email: lead.email, town: lead.town, source: lead.source || "website" })
+    db.from("customers").insert({ name: lead.name, phone: lead.phone, email: lead.email, address: lead.address, town: lead.town, source: lead.source || "website" })
       .select().single().then(function (r) {
         if (r.error) { alert(r.error.message); return; }
         db.from("jobs").insert({ customer_id: r.data.id, service_type: mapService(lead.service_type), status: "new_lead", description: lead.message })
